@@ -50,26 +50,28 @@
   });
   // accept drags for Trash delete
   document.addEventListener('dragover', e=>{ if(e.dataTransfer && e.dataTransfer.types.includes('application/x-win95-item')) e.preventDefault(); });
-  document.addEventListener('drop', e=>{
-    const dt=e.dataTransfer; if(!(dt && dt.types.includes('application/x-win95-item'))) return;
-    e.preventDefault();
-    const data=JSON.parse(dt.getData('application/x-win95-item'));
-    const trashEl=[...document.querySelectorAll('.desktop-icon')].find(x=>x.dataset.role==='trash');
-    const r=trashEl?trashEl.getBoundingClientRect():null;
-    if(r && e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom){
-      window.fsDelete(data.path, data.name);
-      document.dispatchEvent(new CustomEvent('win95:fsChanged'));
-    }
-  });
-})();
+    document.addEventListener('drop', e=>{
+      const dt=e.dataTransfer; if(!(dt && dt.types.includes('application/x-win95-item'))) return;
+      e.preventDefault();
+      const data=JSON.parse(dt.getData('application/x-win95-item'));
+      const trashEl=[...document.querySelectorAll('.desktop-icon')].find(x=>x.dataset.role==='trash');
+      const r=trashEl?trashEl.getBoundingClientRect():null;
+      if(r && e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom){
+        window.fsDelete(data.path, data.name);
+        document.dispatchEvent(new CustomEvent('win95:fsChanged'));
+      }
+    });
 
-  function alignIcons(){
-    const items = Array.from(desktop.querySelectorAll('.desktop-icon'));
-    const trash = items.find(el => el.querySelector('.label') && el.querySelector('.label').textContent.trim() === 'Trash');
-    const others = items.filter(el => el !== trash);
-    const r = desktop.getBoundingClientRect();
-    const colW=130, rowH=112; let x=16, y=16;
-    others.forEach(el=>{ el.style.left=x+'px'; el.style.top=y+'px'; y+=rowH; if(y+rowH>r.height-40){ y=16; x+=colW; } });
-    if(trash){ trash.style.left='auto'; trash.style.right='16px'; trash.style.top='auto'; trash.style.bottom='48px'; }
-  }
-  window.alignIcons=alignIcons; setTimeout(alignIcons,50);
+    function alignIcons(){
+      const items = Array.from(desktop.querySelectorAll('.desktop-icon'));
+      const trash = items.find(el => el.querySelector('.label') && el.querySelector('.label').textContent.trim() === 'Trash');
+      const others = items.filter(el => el !== trash);
+      const r = desktop.getBoundingClientRect();
+      const colW=130, rowH=112; let x=16, y=16;
+      others.forEach(el=>{ el.style.left=x+'px'; el.style.top=y+'px'; y+=rowH; if(y+rowH>r.height-40){ y=16; x+=colW; } });
+      if(trash){ trash.style.left='auto'; trash.style.right='16px'; trash.style.top='auto'; trash.style.bottom='48px'; }
+    }
+
+    window.alignIcons=alignIcons;
+    setTimeout(alignIcons,50);
+  })();

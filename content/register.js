@@ -1,0 +1,1 @@
+window.__FOLDERS={}; window.__registerFolder=(n,d)=>{window.__FOLDERS[n]=d};

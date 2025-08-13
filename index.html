@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Win95 Mini OS</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="desktop" aria-label="Desktop"></div>
+  <div id="taskbar" aria-label="Taskbar">
+    <button id="start-btn" aria-haspopup="true" aria-expanded="false">Start</button>
+    <div id="task-buttons" role="tablist" aria-label="Open windows"></div>
+    <div id="clock" aria-live="polite"></div>
+    <div id="start-menu" hidden>
+      <ul>
+        <li><button data-action="app" data-target="explorer">My PC</button></li>
+        <li><button data-action="app" data-target="paint">Paint</button></li>
+        <li><button data-action="app" data-target="browser">Browser</button></li>
+        <li><button data-action="app" data-target="notepad_pro">NotePad</button></li>
+        <li><button data-action="app" data-target="doom">DOOM</button></li><li class="separator"></li>
+      <li><button data-action="align-icons">Align Icons</button></li>
+        <li><button data-action="link" data-target="https://www.behance.net/sergio_thk">Shut down…</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <template id="window-template">
+    <div class="window" role="dialog" aria-modal="false">
+      <div class="titlebar">
+        <div class="title"></div>
+        <div class="buttons">
+          <button class="min" aria-label="Minimize">_</button>
+          <button class="max" aria-label="Maximize">□</button>
+          <button class="close" aria-label="Close">X</button>
+        </div>
+      </div>
+      <div class="content"></div>
+      <div class="statusbar"></div>
+    
+      <!-- Resize handles -->
+      <div class="resize-handle n" data-dir="n" aria-hidden="true"></div>
+      <div class="resize-handle s" data-dir="s" aria-hidden="true"></div>
+      <div class="resize-handle e" data-dir="e" aria-hidden="true"></div>
+      <div class="resize-handle w" data-dir="w" aria-hidden="true"></div>
+      <div class="resize-handle ne" data-dir="ne" aria-hidden="true"></div>
+      <div class="resize-handle nw" data-dir="nw" aria-hidden="true"></div>
+      <div class="resize-handle se" data-dir="se" aria-hidden="true"></div>
+      <div class="resize-handle sw" data-dir="sw" aria-hidden="true"></div>
+    </div>
+  </template>
+
+  <script src="core/apps_index.js"></script>
+  <script src="core/windowing.js"></script>
+  <script src="core/menu.js"></script>
+  <!-- Content registry (works on file://) -->
+  <script src="content/register.js"></script>
+  <script src="content/folders/folder-01.js"></script>
+  <script src="content/folders/folder-02.js"></script>
+  <script src="content/folders/folder-03.js"></script>
+  <script src="content/folders/folder-04.js"></script>
+  <script src="content/folders/folder-05.js"></script>
+  <script src="content/folders/folder-06.js"></script>
+  <script src="content/folders/folder-07.js"></script>
+  <script src="content/folders/folder-08.js"></script>
+  <script src="content/folders/folder-09.js"></script>
+  <script src="content/folders/folder-10.js"></script>
+  <script src="core/fs.js"></script>
+  <script src="core/displaynames.js"></script>
+  <script src="core/patch_labels.js"></script>
+  <script src="core/desktop.js"></script>
+
+  <!-- Apps -->
+  <script src="apps_refined/notepad_pro.app.js"></script>
+  <script src="apps_refined/paint.app.js"></script>
+  <script src="apps_refined/browser.app.js"></script>
+  <script src="apps_refined/imageviewer.app.js"></script>
+  <script src="apps_refined/photoexplorer.app.js"></script>
+  <script src="apps_refined/videoplayer.app.js"></script>
+  <script src="apps_refined/explorer.app.js"></script>
+
+  <!-- DOOM apps -->
+  <script src="apps_refined/doom.app.js"></script>
+
+  
+
+  <script src="script.js"></script>
+</body>
+</html>
